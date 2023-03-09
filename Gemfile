@@ -34,7 +34,7 @@ gem "bootsnap", require: false
 # gem "image_processing", "~> 1.2"
 
 # Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
-# gem "rack-cors"
+gem "rack-cors"
 # Gemfile
 gem "rswag-api"
 gem "rswag-ui"
@@ -42,6 +42,8 @@ gem "rswag-ui"
 group :development, :test do
   gem "rspec-rails"
   gem "rswag-specs"
+  gem 'faker'
+  gem "factory_bot_rails"
 end
 
 group :development, :test do

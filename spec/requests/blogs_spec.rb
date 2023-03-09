@@ -1,31 +1,38 @@
-require 'swagger_helper'
+require "swagger_helper"
 
-RSpec.describe 'blogs', type: :request do
-
-  path '/blogs' do
-
-    post('create blog') do
-      response(200, 'successful') do
-
+RSpec.describe "blogs", type: :request do
+  path "/blogs" do
+    post("create blog") do
+      description "Creates a blog"
+      tags "Blogs"
+      consumes "application/json"
+      parameter name: :create_blog, in: :body, schema: {
+        type: "object",
+        properties: {
+          title: { type: "string" },
+          content: { type: "string" },
+          image_path: { type: "string" },
+        },
+      }
+      response(200, "successful") do
         after do |example|
           example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
+            "application/json" => {
+              example: JSON.parse(response.body, symbolize_names: true),
+            },
           }
         end
         run_test!
       end
     end
 
-    get('list blogs') do
-      response(200, 'successful') do
-
+    get("list blogs") do
+      response(200, "successful") do
         after do |example|
           example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
+            "application/json" => {
+              example: JSON.parse(response.body, symbolize_names: true),
+            },
           }
         end
         run_test!
@@ -33,49 +40,49 @@ RSpec.describe 'blogs', type: :request do
     end
   end
 
-  path '/blogs/{id}' do
+  path "/blogs/{id}" do
     # You'll want to customize the parameter types...
-    parameter name: 'id', in: :path, type: :string, description: 'id'
+    parameter name: "id", in: :path, type: :string, description: "id"
 
-    get('show blog') do
-      response(200, 'successful') do
-        let(:id) { '123' }
+    get("show blog") do
+      response(200, "successful") do
+        let(:id) { "123" }
 
         after do |example|
           example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
+            "application/json" => {
+              example: JSON.parse(response.body, symbolize_names: true),
+            },
           }
         end
         run_test!
       end
     end
 
-    put('update blog') do
-      response(200, 'successful') do
-        let(:id) { '123' }
+    put("update blog") do
+      response(200, "successful") do
+        let(:id) { "123" }
 
         after do |example|
           example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
+            "application/json" => {
+              example: JSON.parse(response.body, symbolize_names: true),
+            },
           }
         end
         run_test!
       end
     end
 
-    delete('delete blog') do
-      response(200, 'successful') do
-        let(:id) { '123' }
+    delete("delete blog") do
+      response(200, "successful") do
+        let(:id) { "123" }
 
         after do |example|
           example.metadata[:response][:content] = {
-            'application/json' => {
-              example: JSON.parse(response.body, symbolize_names: true)
-            }
+            "application/json" => {
+              example: JSON.parse(response.body, symbolize_names: true),
+            },
           }
         end
         run_test!
